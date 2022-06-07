@@ -1,6 +1,11 @@
 # cypress test result files
 cypress
 
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
 # e2e test directory
 test/e2e
 
