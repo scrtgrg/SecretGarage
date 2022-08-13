@@ -11,7 +11,11 @@ import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const countPerPage = 10;
   const [details, setDetails] = React.useState(null);
+  const [totalDetails, setTotalDetailsCount] = React.useState(0);
+  const [currentPage, setCurrentPage] = React.useState(1);
+
   const [users, setUsers] = React.useState(null);
   
   const [show, setShow] = React.useState(false);
@@ -27,10 +31,28 @@ function App() {
       getDetails();
   }, []);
 
-  function getDetails() {
-    fetch("/details")
-        .then((res) => res.json())
-        .then((details) => setDetails(details));
+  function deleteDetail(id) {
+    fetch('/details?' +  + new URLSearchParams({
+      id: id
+    }), { method: 'DELETE' })
+        .then(() => {
+          let filtered = details.find(x => x.id != id);
+          setDetails(filtered);
+        });
+  }
+
+  function getDetails(page = 1) {
+    setCurrentPage(page);
+    const skip = countPerPage * (page - 1);
+    
+    fetch("/details?" + new URLSearchParams({
+        take: countPerPage,
+        skip: skip,
+    })).then((res) => res.json())
+        .then((response) => {
+          setDetails(response.details);
+          setTotalDetailsCount(response.total);
+        });
   }
 
   return (
@@ -52,7 +74,9 @@ function App() {
           </div>
         </div>
         <div>
-          <DetailsList details={details}></DetailsList>
+          <DetailsList details={details} updatePage={getDetails}
+            total={totalDetails} currentPage={currentPage} countPerPage={countPerPage}
+            deleteDetail={deleteDetail}></DetailsList>
         </div>
       </div>
       {/* <div>
@@ -61,5 +85,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

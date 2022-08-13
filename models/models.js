@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const { number } = require("yargs");
 const { Double } = require("bson/lib/double");
+require('mongoose-double')(mongoose);
 
+const SchemaTypes = mongoose.Schema.Types;
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -25,7 +27,7 @@ const DetailSchema = new mongoose.Schema({
         required: true,
     },
     price: {
-        type: mongoose.Decimal128,
+        type: SchemaTypes.Double,
         required: true
     }
 });

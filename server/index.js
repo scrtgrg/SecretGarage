@@ -65,10 +65,23 @@ app.get("/createUser", async (request, response) => {
 });
 
 app.get("/details", async (request, response) => {
-    const details = await Detail.find({});
+    const details = await Detail.find({}).limit(request.query.take)
+        .skip(request.query.skip);
+    const total = await Detail.count();
   
     try {
-      response.send(details);
+      response.send({ details: details, total: total });
+    } catch (error) {
+      response.status(500).send(error);
+    }
+});
+
+app.delete("/details", async (request, response) => {
+    try {
+        console.log(request.query.id);
+      await Detail.deleteOne({ _id: request.query.id });
+  
+      response.send("Detail was successsssfully deleted.");
     } catch (error) {
       response.status(500).send(error);
     }

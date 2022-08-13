@@ -23,3 +23,22 @@ code {
 .pad-5 {
   padding: 5px;
 }
+
+.rc-pagination-prev,
+.rc-pagination-next,
+.rc-pagination-item-link,
+.rc-pagination-item {
+  border-radius: 0.375rem !important;
+}
+
+.rc-pagination-prev:hover,
+.rc-pagination-next:hover,
+.rc-pagination-item-link:hover,
+.rc-pagination-item:hover {
+  border-color: #0d6efd !important;
+}
+
+.rc-pagination-item-active {
+  background: #0d6efd !important;
+  color: white;
+}
