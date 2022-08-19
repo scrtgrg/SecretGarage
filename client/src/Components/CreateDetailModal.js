@@ -14,7 +14,8 @@ async function postData(url = '', data = {}, callbackFunction = Function) {
       });
 }
 
-function CreateDetailModal(props) {    
+function CreateDetailModal(props) {
+    const [originalNumber, setOriginalNumber] = React.useState("");
     const [name, setName] = React.useState("");
     const [car, setCar] = React.useState("");
     const [price, setPrice] = React.useState("");
@@ -24,6 +25,8 @@ function CreateDetailModal(props) {
         setName(e.target.value);
         console.log(name);
     }
+
+    function onOriginalNumberChange(e) { setOriginalNumber(e.target.value); }
 
     function onCarCnahge(e) { setCar(e.target.value); }
     
@@ -57,6 +60,10 @@ function CreateDetailModal(props) {
             </Modal.Header>
             <Modal.Body>
                 {/* <CreateDetailForm></CreateDetailForm> */}
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Original number</Form.Label>
+                    <Form.Control type="text" placeholder="Enter original number" value={originalNumber} onChange={onOriginalNumberChange} />
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter name" value={name} onChange={onNameChange} />

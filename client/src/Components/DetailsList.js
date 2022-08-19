@@ -23,6 +23,7 @@ function DetailsList(props) {
                 <Table striped bordered hover responsive size="sm">
                     <thead>
                         <tr>
+                            <th>Original Number</th>
                             <th>Name</th>
                             <th>Car</th>
                             <th>Price</th>
@@ -33,6 +34,7 @@ function DetailsList(props) {
                     {props.details.map((detail, key) => {
                         return (
                             <tr key={key}>
+                                <td>{detail.originalNumber}</td>
                                 <td>{detail.name}</td>
                                 <td>{detail.car}</td>
                                 <td>{detail.price}</td>

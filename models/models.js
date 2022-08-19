@@ -18,6 +18,10 @@ const UserSchema = new mongoose.Schema({
 const User = mongoose.model("User", UserSchema);
 
 const DetailSchema = new mongoose.Schema({
+    originalNumber: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true,
