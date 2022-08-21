@@ -42,7 +42,7 @@ function CreateDetailModal(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        let model = { name: name, car: car, price };
+        let model = { name: name, car: car, price, originalNumber };
         let isValid = validate(model);
         if (isValid) {
             setMessage(null);
